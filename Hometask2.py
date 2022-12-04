@@ -1,14 +1,14 @@
-from ECurve import ECurve, ECPoint
+from Curve import Curve, Point
 
-curve = ECurve(3, 4)
+curve = Curve(12, 3)
 print(curve.EquationToString())
 curve.PrintEquation()
 
-p1 = ECPoint(0, 2)
+p1 = Point(5, 8)
 p1.PrintECPoint()
 print(p1.ECPointToString(), "- точка яка є еліптичній кривій" if p1.IsOnCurveCheck(curve) else "- точка яка не є еліптичній кривій")
 
-p2 = ECPoint(-1, 0)
+p2 = Point(-1, 0)
 p2.PrintECPoint()
 print(p2.ECPointToString(), "- точка яка є еліптичній кривій" if p2.IsOnCurveCheck(curve) else "- точка яка не є еліптичній кривій")
 

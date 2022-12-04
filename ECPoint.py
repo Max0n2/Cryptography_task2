@@ -1,9 +1,3 @@
-equation = {
-    "a": int(input("Введіть a ")),
-    "b": int(input("Введіть b ")),
-}
-
-print(f'Р-ня еліптичної кривої: y² = x³ + {equation["a"]}x + {equation["b"]}')
 
 class ECPoint:
     def __init__(self, x: int, y: int):
@@ -16,9 +10,9 @@ class ECPoint:
     def PrintECPoint(self) -> None:
         print(self.ECPointToString())
 
-    def DoubleECPoint(self):
-        x = ( (3*self.x**2 + equation['a']) / (2*self.y) )**2 - 2*self.x
-        y = -self.y + ( (3*self.x**2 + equation['a']) / (2*self.y) ) * (self.x - x)
+    def DoubleECPoint(self, curve):
+        x = ( (3*self.x**2 + curve.a) / (2*self.y) )**2 - 2*self.x
+        y = -self.y + ( (3*self.x**2 + curve.a) / (2*self.y) ) * (self.x - x)
 
         return ECPoint(int(x), int(y))
 
@@ -28,13 +22,5 @@ class ECPoint:
 
         return ECPoint(int(x), int(y))
 
-    def IsOnCurveCheck(self):
-        return self.y**2 == int((self.x**3 + equation['a']*self.x + equation['b']))
-
-def AddECPoints(P: ECPoint, Q: ECPoint) -> ECPoint:
-    m = (P.y - Q.y) / (P.x - Q.x)
-
-    x = m**2 - P.x - Q.x
-    y = P.y + m * (x - P.x)
-
-    return ECPoint(int(x), int(y))
+    def IsOnCurveCheck(self, curve):
+        return self.y**2 == int((self.x**3 + curve.a*self.x + curve.b)) 
